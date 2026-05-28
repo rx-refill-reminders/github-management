@@ -43,13 +43,21 @@ jobs:
         env:
           GH_TOKEN: ${{ steps.fetch-app-token.outputs.token }}
         run: |
-          echo "::group::Create new repository"
-          gh api /orgs/${{ github.repository_owner }}/repos \
+          echo "::group::Generate repository"
+          gh api /repos/${{ github.repository_owner }}/template/generate \
             -X POST \
-            -F name="${{ inputs.NAME }}" \
-            -F description="${{ inputs.DESCRIPTION }}" \
+            -H "Accept: application/vnd.github+json" \
+            -F "owner=${{ github.repository_owner }}" \
+            -F "name=${{ inputs.NAME }}" \
+            -F "description=${{ inputs.DESCRIPTION }}" \
+            -F "include_all_branches=false" \
+            -F "private=false"
+          echo "::endgroup::"
+
+          echo "::group::Setup repository settings"
+          gh api /repos/${{ github.repository_owner }}/${{ inputs.NAME }} \
+            -X PATCH \
             -F visibility=public \
-            -F auto_init=true \
             -F allow_squash_merge=true \
             -F allow_merge_commit=false \
             -F allow_rebase_merge=false \
