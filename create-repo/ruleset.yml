@@ -45,4 +45,4 @@ rules:
       required_status_checks: 
         - context: "pr / pr-ready"
           integration_id: 15368
-      do_not_enforce_on_create: false
+      do_not_enforce_on_create: true
