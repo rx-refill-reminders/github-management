@@ -74,3 +74,5 @@ jobs:
               -X POST \
               --input -
           echo "::endgroup::"
+
+          echo "::notice::Created https://github.com/${{ github.repository_owner }}/${{ inputs.NAME }}"
