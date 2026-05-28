@@ -24,7 +24,7 @@ rules:
   - type: non_fast_forward
 
   # PR hygiene
-  - type: pull-request
+  - type: pull_request
     parameters:
       # Require comments to be resolved
       required_review_thread_resolution: true
