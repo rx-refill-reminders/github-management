@@ -10,7 +10,9 @@ bypass_actors:
 # Target the default branch
 target: branch
 conditions:
-  include: ["~DEFAULT_BRANCH"]
+  ref_name:
+    include: ["~DEFAULT_BRANCH"]
+    exclude: []
 
 rules:
 
@@ -31,7 +33,6 @@ rules:
       # Dismiss approvals on push
       dismiss_stale_reviews_on_push: true
       required_approving_review_count: 0
-      required_reviewers: []
       require_code_owner_review: false
       require_last_push_approval: false
       allowed_merge_methods: ["squash"]
@@ -43,4 +44,5 @@ rules:
       strict_required_status_checks_policy: true
       required_status_checks: 
         - context: "pr / pr-ready"
+          integration_id: 15368
       do_not_enforce_on_create: false
