@@ -61,7 +61,7 @@ jobs:
 
           echo "::group::Create PR ruleset"
           cat create-repo/ruleset.yml \
-            | yq -o=json -I0 | \
+            | yq -o=json -I0 '.' | \
             | gh api repos/${{ github.repository_owner }}/${{ inputs.NAME }}/rulesets \
               -X POST \
               --input -
